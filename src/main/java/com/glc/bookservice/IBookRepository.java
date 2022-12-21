@@ -7,4 +7,5 @@ public interface IBookRepository<T> {
 
     public Collection<T> getAllBooks();
     public Book getABookById(int id);
+    public Book deleteABookById(int id);
 }

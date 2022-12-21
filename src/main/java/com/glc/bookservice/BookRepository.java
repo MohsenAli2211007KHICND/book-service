@@ -27,5 +27,9 @@ public class BookRepository implements IBookRepository<Book>{
     public Book getABookById(int id) {
         return repository.get(id);
     }
+    @Override
+    public Book deleteABookById(int id) {
+        return repository.remove(id);
+    }
     
 }

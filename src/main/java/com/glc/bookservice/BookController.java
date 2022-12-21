@@ -31,6 +31,10 @@ public class BookController {
     public Book getABookById(@PathVariable int id){
         return this.repository.getABookById(id);
     }
+    @GetMapping("/{id}") // (GET) https://localhost:8080/books/all/{id}
+    public Book deleteABookById(@PathVariable int id){
+        return this.repository.deleteABookById(id);
+    }
 
 
 
