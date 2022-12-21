@@ -3,6 +3,7 @@ package com.glc.bookservice;
 import java.util.Collection;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,11 @@ public class BookController {
     public Collection<Book> getAllBooks(){
         return this.repository.getAllBooks();
     }
+    @GetMapping("/{id}") // (GET) https://localhost:8080/books/all/{id}
+    public Book getABookById(@PathVariable int id){
+        return this.repository.getABookById(id);
+    }
+
 
 
 }

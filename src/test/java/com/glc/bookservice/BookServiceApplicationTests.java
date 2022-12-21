@@ -18,6 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -72,4 +74,25 @@ class BookServiceApplicationTests {
 			.andExpect(status().isOk())
 			.andExpect(content().json(jsonBooks.write(books).getJson()));
 	}
+		//AC3:  When I click “View All Books” the application will display a list of all the books in my list.
+		@Test
+		public void canGetABookById() throws Exception {
+			Book book1 = new Book(1, "code with mosh", "jj mortk", 1989, 320);
+			Book book2 = new Book(2, "code", "someone", 1976, 1538);
+			Collection<Book> books = new ArrayList<Book>();
+			books.add(book1);
+			books.add(book2);
+			when(bookRepository.getABookById(2)).thenReturn(book1);
+			mvc.perform(get("/books/1")
+					.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().json(jsonBook.write(book1).getJson()));
+		}
+
+// 	AC4: When I click the checkbox next to a book, and then the press the “Delete Book” button, the application will remove the
+// book from my list.
+
+	// @Test
+
+
 }
