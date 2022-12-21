@@ -28,8 +28,17 @@ public class BookRepository implements IBookRepository<Book>{
         return repository.get(id);
     }
     @Override
-    public Book deleteABookById(int id) {
-        return repository.remove(id);
+    public Collection<Book> deleteABookById(int id) {
+        repository.remove(id);
+        return repository.values();
+    }
+    @Override
+    public Book updateSpecificBook(Book myBook){
+        Book specificBook = repository.get(myBook.getId());
+        if (specificBook != null){
+            repository.get(myBook.getId());
+        }
+        return repository.put(myBook.getId(), myBook);
     }
     
 }

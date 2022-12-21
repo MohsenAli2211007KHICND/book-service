@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -96,9 +97,32 @@ class BookServiceApplicationTests {
 	// Book” button, the application will remove the
 	// book from my list.
 
-	// @Test
-	// public void canDeleteABookById() throws Exception {
+	@Test
+	public void deleteABookById() throws Exception {
+		Book book1 = new Book(1, "code with mosh", "jj mortk", 1989, 320);
+		Book book2 = new Book(2, "code", "someone", 1976, 1538);
+		Collection<Book> books = new ArrayList<Book>();
+		books.add(book1);
+		books.add(book2);
+		books.remove(book1);
+		when(bookRepository.deleteABookById(1)).thenReturn(books);
+		mvc.perform(delete("/books/1"))
+				.andExpect(status().isOk())
+				.andExpect(content().json(jsonBooks.write(books).getJson()));
+	}
+	// AC5: When I click the checkbox next to a book, and then press
+	// the “Update Book” button, the application will allow me to
+	// update any of the information about the book.
+	@Test void updateBook() throws Exception{
+		Book book1 = new Book(1, "code with mosh", "jj mortk", 1989, 320);
+		Book book2 = new Book(2, "code", "someone", 1976, 1538);
 		
-	// }
+		when(bookRepository.updateSpecificBook(any())).thenReturn(book1);
+		mvc.perform(put("/books")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(jsonBook.write(book1).getJson()))
+			.andExpect(status().isOk())
+			.andExpect(content().json(jsonBook.write(book1).getJson()));
+	}
 
 }
