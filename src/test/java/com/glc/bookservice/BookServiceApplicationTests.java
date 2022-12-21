@@ -82,7 +82,7 @@ class BookServiceApplicationTests {
 			Collection<Book> books = new ArrayList<Book>();
 			books.add(book1);
 			books.add(book2);
-			when(bookRepository.getABookById(2)).thenReturn(book1);
+			when(bookRepository.getABookById(1)).thenReturn(book1);
 			mvc.perform(get("/books/1")
 					.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
