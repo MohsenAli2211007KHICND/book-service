@@ -85,7 +85,7 @@ class BookServiceApplicationTests {
 		Collection<Book> books = new ArrayList<Book>();
 		books.add(book1);
 		books.add(book2);
-		when(bookRepository.getABookById(5)).thenReturn(book1);
+		when(bookRepository.getABookById(1)).thenReturn(book1);
 		mvc.perform(get("/books/1")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
@@ -96,5 +96,9 @@ class BookServiceApplicationTests {
 	// Book” button, the application will remove the
 	// book from my list.
 
+	// @Test
+	// public void canDeleteABookById() throws Exception {
+		
+	// }
 
 }
